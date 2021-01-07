@@ -1,6 +1,7 @@
 const http = require("http")
 const socketIo = require('socket.io')
 
+const { logger } = require("./util")
 const Routes = require("./routes")
 const PORT = 3000
 
@@ -22,13 +23,13 @@ const io = socketIo(server, {
   }
 })
 
-io.on("connection", (socket) => console.log("ALOO"))
+io.on("connection", (socket) => logger.info("someone connected " + socket.id))
 io.emit("file-uploaded")
 
 const startServer = () => {
   const { address, port } = server.address()
 
-  console.log(`app running at http://${address}:${port}`)
+  logger.info(`app running at http://${address}:${port}`)
 }
 
 server.listen(PORT, startServer)
