@@ -24,7 +24,6 @@ const io = socketIo(server, {
 })
 
 io.on("connection", (socket) => logger.info("someone connected " + socket.id))
-io.emit("file-uploaded")
 
 const startServer = () => {
   const { address, port } = server.address()
